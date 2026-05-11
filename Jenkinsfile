@@ -31,13 +31,7 @@ pipeline {
 
         stage('Docker Compose Build') {
             steps {
-
-
-                sh '''
-                # docker compose build adminservice authservice chatservice streamingservice
-        
-                docker compose build frontend
-                '''
+                sh 'docker compose build frontend'
             }
         }
 
