@@ -9,7 +9,7 @@ services:
     volumes:
       - mongo-data:/data/db
 
-  auth:
+  authservice:
     build:
       context: ./backend/authService
     depends_on:
@@ -26,7 +26,7 @@ services:
     ports:
       - "${AUTH_PORT:-3001}:3001"
 
-  streaming:
+  streamingservice:
     build:
       context: ./backend
       dockerfile: streamingService/Dockerfile
@@ -46,7 +46,7 @@ services:
     ports:
       - "${STREAMING_PORT:-3002}:3002"
 
-  admin:
+  adminservice:
     build:
       context: ./backend
       dockerfile: adminService/Dockerfile
@@ -65,7 +65,7 @@ services:
     ports:
       - "${ADMIN_PORT:-3003}:3003"
 
-  chat:
+  chatservce:
     build:
       context: ./backend
       dockerfile: chatService/Dockerfile
