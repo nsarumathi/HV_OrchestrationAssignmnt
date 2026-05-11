@@ -33,7 +33,8 @@ pipeline {
             steps {
 
                   sh '''
-                docker compose build adminservice authservice chatservice streamingservice
+               # docker compose build adminservice authservice chatservice streamingservice
+                docker compose build frontend
                 '''
             }
         }
@@ -54,15 +55,15 @@ pipeline {
 
                 sh '''
 
-               # docker tag frontend:latest $FRONTEND_REPO:$IMAGE_TAG
+                docker tag frontend:latest $FRONTEND_REPO:$IMAGE_TAG
 
-                docker tag hv_orchestrationpipeline-adminservice:latest $ADMIN_REPO:$IMAGE_TAG
+               # docker tag hv_orchestrationpipeline-adminservice:latest $ADMIN_REPO:$IMAGE_TAG
 
-                docker tag hv_orchestrationpipeline-authservice:latest $AUTH_REPO:$IMAGE_TAG
+               # docker tag hv_orchestrationpipeline-authservice:latest $AUTH_REPO:$IMAGE_TAG
 
-                docker tag hv_orchestrationpipeline-chatservice:latest $CHAT_REPO:$IMAGE_TAG
+               # docker tag hv_orchestrationpipeline-chatservice:latest $CHAT_REPO:$IMAGE_TAG
 
-                docker tag hv_orchestrationpipeline-streamingservice:latest $STREAM_REPO:$IMAGE_TAG
+               # docker tag hv_orchestrationpipeline-streamingservice:latest $STREAM_REPO:$IMAGE_TAG
 
                 '''
             }
@@ -73,15 +74,15 @@ pipeline {
 
                 sh '''
 
-               # docker push $FRONTEND_REPO:$IMAGE_TAG
+                docker push $FRONTEND_REPO:$IMAGE_TAG
 
-                docker push $ADMIN_REPO:$IMAGE_TAG
+                # docker push $ADMIN_REPO:$IMAGE_TAG
 
-                docker push $AUTH_REPO:$IMAGE_TAG
+               #  docker push $AUTH_REPO:$IMAGE_TAG
 
-                docker push $CHAT_REPO:$IMAGE_TAG
+               # docker push $CHAT_REPO:$IMAGE_TAG
 
-                docker push $STREAM_REPO:$IMAGE_TAG
+               # docker push $STREAM_REPO:$IMAGE_TAG
 
                 '''
             }
