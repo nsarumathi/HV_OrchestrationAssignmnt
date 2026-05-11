@@ -34,9 +34,9 @@ pipeline {
 
 
                 sh '''
-                # docker-compose build adminservice authservice chatservice streamingservice
+                # docker compose build adminservice authservice chatservice streamingservice
         
-                docker-compose build frontend
+                docker compose build frontend
                 '''
             }
         }
