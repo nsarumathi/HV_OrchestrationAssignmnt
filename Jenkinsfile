@@ -54,7 +54,7 @@ pipeline {
 
                 sh '''
 
-               // docker tag frontend:latest $FRONTEND_REPO:$IMAGE_TAG
+               # docker tag frontend:latest $FRONTEND_REPO:$IMAGE_TAG
 
                 docker tag hv_orchestrationpipeline-adminservice:latest $ADMIN_REPO:$IMAGE_TAG
 
@@ -73,7 +73,7 @@ pipeline {
 
                 sh '''
 
-               // docker push $FRONTEND_REPO:$IMAGE_TAG
+               # docker push $FRONTEND_REPO:$IMAGE_TAG
 
                 docker push $ADMIN_REPO:$IMAGE_TAG
 
