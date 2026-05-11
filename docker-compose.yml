@@ -90,10 +90,10 @@ services:
         REACT_APP_CHAT_API_URL: ${REACT_APP_CHAT_API_URL:-http://localhost:3004/api/chat}
         REACT_APP_CHAT_SOCKET_URL: ${REACT_APP_CHAT_SOCKET_URL:-http://localhost:3004}
     depends_on:
-      - auth
-      - streaming
-      - admin
-      - chat
+      - authservice
+      - streamingservice
+      - adminservice
+      - chatservice
     ports:
       - "3000:80"
 
