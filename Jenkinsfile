@@ -56,13 +56,13 @@ pipeline {
 
                 docker tag frontend:latest $FRONTEND_REPO:$IMAGE_TAG
 
-                docker tag adminservice:latest $ADMIN_REPO:$IMAGE_TAG
+                docker tag hv_orchestrationpipeline-adminservice:latest $ADMIN_REPO:$IMAGE_TAG
 
-                docker tag authservice:latest $AUTH_REPO:$IMAGE_TAG
+                docker tag hv_orchestrationpipeline-authservice:latest $AUTH_REPO:$IMAGE_TAG
 
-                docker tag chatservice:latest $CHAT_REPO:$IMAGE_TAG
+                docker tag hv_orchestrationpipeline-chatservice:latest $CHAT_REPO:$IMAGE_TAG
 
-                docker tag streamingservice:latest $STREAM_REPO:$IMAGE_TAG
+                docker tag hv_orchestrationpipeline-streamingservice:latest $STREAM_REPO:$IMAGE_TAG
 
                 '''
             }
