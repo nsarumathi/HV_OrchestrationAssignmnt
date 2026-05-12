@@ -51,15 +51,15 @@ pipeline {
 
                 sh '''
 
-                docker tag hv_orchestrationpipeline-frontend:latest $FRONTEND_REPO:$IMAGE_TAG
+                docker tag hv_mern_pipeline-frontend:latest $FRONTEND_REPO:$IMAGE_TAG
 
-               # docker tag hv_orchestrationpipeline-adminservice:latest $ADMIN_REPO:$IMAGE_TAG
+               # docker tag hv_mern_pipeline-adminservice:latest $ADMIN_REPO:$IMAGE_TAG
 
-               # docker tag hv_orchestrationpipeline-authservice:latest $AUTH_REPO:$IMAGE_TAG
+               # docker tag hv_mern_pipeline-authservice:latest $AUTH_REPO:$IMAGE_TAG
 
-               # docker tag hv_orchestrationpipeline-chatservice:latest $CHAT_REPO:$IMAGE_TAG
+               # docker tag hv_mern_pipeline-chatservice:latest $CHAT_REPO:$IMAGE_TAG
 
-               # docker tag hv_orchestrationpipeline-streamingservice:latest $STREAM_REPO:$IMAGE_TAG
+               # docker tag hv_mern_pipeline-streamingservice:latest $STREAM_REPO:$IMAGE_TAG
 
                 '''
             }
