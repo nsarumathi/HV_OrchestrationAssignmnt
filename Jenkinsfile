@@ -31,7 +31,7 @@ pipeline {
 
         stage('Docker Compose Build') {
             steps {
-                sh 'docker compose build frontend'
+                sh 'docker compose build adminservice authservice chatservice streamingservice'
             }
         }
 
@@ -51,15 +51,15 @@ pipeline {
 
                 sh '''
 
-                docker tag hv_mern_pipeline-frontend:latest $FRONTEND_REPO:$IMAGE_TAG
+               # docker tag hv_mern_pipeline-frontend:latest $FRONTEND_REPO:$IMAGE_TAG
 
-               # docker tag hv_mern_pipeline-adminservice:latest $ADMIN_REPO:$IMAGE_TAG
+                docker tag hv_mern_pipeline-adminservice:latest $ADMIN_REPO:$IMAGE_TAG
 
-               # docker tag hv_mern_pipeline-authservice:latest $AUTH_REPO:$IMAGE_TAG
+                docker tag hv_mern_pipeline-authservice:latest $AUTH_REPO:$IMAGE_TAG
 
-               # docker tag hv_mern_pipeline-chatservice:latest $CHAT_REPO:$IMAGE_TAG
+                docker tag hv_mern_pipeline-chatservice:latest $CHAT_REPO:$IMAGE_TAG
 
-               # docker tag hv_mern_pipeline-streamingservice:latest $STREAM_REPO:$IMAGE_TAG
+                docker tag hv_mern_pipeline-streamingservice:latest $STREAM_REPO:$IMAGE_TAG
 
                 '''
             }
@@ -70,15 +70,15 @@ pipeline {
 
                 sh '''
 
-                docker push $FRONTEND_REPO:$IMAGE_TAG
+                # docker push $FRONTEND_REPO:$IMAGE_TAG
 
-                # docker push $ADMIN_REPO:$IMAGE_TAG
+                docker push $ADMIN_REPO:$IMAGE_TAG
 
-               #  docker push $AUTH_REPO:$IMAGE_TAG
+                docker push $AUTH_REPO:$IMAGE_TAG
 
-               # docker push $CHAT_REPO:$IMAGE_TAG
+                docker push $CHAT_REPO:$IMAGE_TAG
 
-               # docker push $STREAM_REPO:$IMAGE_TAG
+                docker push $STREAM_REPO:$IMAGE_TAG
 
                 '''
             }
