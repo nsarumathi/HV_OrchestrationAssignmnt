@@ -75,13 +75,13 @@ services:
     build:
       context: ./frontend
       args:
-        REACT_APP_AUTH_URL: http://k8s-hvapp-authserv-988cdeec4a-61db9b66f7c5c00b.elb.ap-south-2.amazonaws.com:3001
+        REACT_APP_AUTH_URL: http://k8s-hvapp-authserv-390a110ab7-cbf658734114d926.elb.ap-south-2.amazonaws.com:3001
       
-        REACT_APP_ADMIN_URL: http://k8s-hvapp-adminser-08d387da5e-d417fb01b8a55463.elb.ap-south-2.amazonaws.com:3003
+        REACT_APP_ADMIN_URL: http://k8s-hvapp-adminser-10f3822b7e-fed92cceb0a00f91.elb.ap-south-2.amazonaws.com:3003
       
-        REACT_APP_CHAT_URL: http://k8s-hvapp-chatserv-6d54ada556-3e6d4ae844e7538b.elb.ap-south-2.amazonaws.com:3004
+        REACT_APP_CHAT_URL: http://k8s-hvapp-chatserv-0752b84d17-5819c23091f9f12c.elb.ap-south-2.amazonaws.com:3004
       
-        REACT_APP_STREAMING_URL: http://k8s-hvapp-streamin-22740a4e8a-9d9e87d5be4dcdfa.elb.ap-south-2.amazonaws.com:3002
+        REACT_APP_STREAMING_URL: http://k8s-hvapp-streamin-761585a338-32c0d72d8081f784.elb.ap-south-2.amazonaws.com:3002
     image: hv-frontend:latest
     depends_on:
       - authservice
