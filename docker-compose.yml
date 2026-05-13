@@ -75,10 +75,10 @@ services:
     build:
       context: ./frontend
       args:
-        REACT_APP_AUTH_URL: http://localhost:3001
-        REACT_APP_ADMIN_URL: http://localhost:3003
-        REACT_APP_CHAT_URL: http://localhost:3004
-        REACT_APP_STREAMING_URL: http://localhost:3002
+        REACT_APP_AUTH_URL: http://authservice:3001
+        REACT_APP_ADMIN_URL: http://adminservice:3003
+        REACT_APP_CHAT_URL: http://chatservice:3004
+        REACT_APP_STREAMING_URL: http://streamingservice:3002
     image: hv-frontend:latest
     depends_on:
       - authservice
