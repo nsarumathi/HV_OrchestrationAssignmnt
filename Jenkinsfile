@@ -30,9 +30,9 @@ pipeline {
                 // 🔐 Inject secrets properly here
                 withCredentials([
 
-                    string(credentialsId: 'mongodbpassword', variable: 'MONGO_PASSWORD'),
-                    string(credentialsId: 'AWS Access key', variable: 'AWS_ACCESS_KEY_ID'),
-                    string(credentialsId: 'AWS secret access key', variable: 'AWS_SECRET_ACCESS_KEY')
+                    string(credentialsId: 'YOUR_PASSWORD', variable: 'MONGO_PASSWORD'),
+                    string(credentialsId: 'NEW_ACCESS_KEY', variable: 'AWS_ACCESS_KEY_ID'),
+                    string(credentialsId: 'NEW_SECRET_KEY', variable: 'AWS_SECRET_ACCESS_KEY')
 
                 ]) {
 
