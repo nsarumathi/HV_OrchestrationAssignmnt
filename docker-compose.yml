@@ -5,6 +5,7 @@ services:
   authservice:
     build:
       context: ./backend/authService
+    image: hv-authservice:latest
     environment:
       PORT: 3001
       MONGO_URI: ${MONGO_URI}
@@ -17,26 +18,10 @@ services:
     ports:
       - "3001:3001"
 
-  streamingservice:
-    build:
-      context: ./backend/streamingService
-    environment:
-      PORT: 3004
-      MONGO_URI: ${MONGO_URI}
-      JWT_SECRET: ${JWT_SECRET}
-      CLIENT_URLS: ${CLIENT_URLS}
-      AWS_ACCESS_KEY_ID: ${AWS_ACCESS_KEY_ID}
-      AWS_SECRET_ACCESS_KEY: ${AWS_SECRET_ACCESS_KEY}
-      AWS_REGION: ${AWS_REGION}
-      AWS_S3_BUCKET: ${AWS_S3_BUCKET}
-      AWS_CDN_URL: ${AWS_CDN_URL}
-      STREAMING_PUBLIC_URL: ${STREAMING_PUBLIC_URL}
-    ports:
-      - "3004:3004"
-
   adminservice:
     build:
       context: ./backend/adminService
+    image: hv-adminservice:latest
     environment:
       PORT: 3002
       MONGO_URI: ${MONGO_URI}
@@ -52,6 +37,7 @@ services:
   chatservice:
     build:
       context: ./backend/chatService
+    image: hv-chatservice:latest
     environment:
       PORT: 3003
       MONGO_URI: ${MONGO_URI}
@@ -59,6 +45,24 @@ services:
       CLIENT_URLS: ${CLIENT_URLS}
     ports:
       - "3003:3003"
+
+  streamingservice:
+    build:
+      context: ./backend/streamingService
+    image: hv-streamingservice:latest
+    environment:
+      PORT: 3004
+      MONGO_URI: ${MONGO_URI}
+      JWT_SECRET: ${JWT_SECRET}
+      CLIENT_URLS: ${CLIENT_URLS}
+      AWS_ACCESS_KEY_ID: ${AWS_ACCESS_KEY_ID}
+      AWS_SECRET_ACCESS_KEY: ${AWS_SECRET_ACCESS_KEY}
+      AWS_REGION: ${AWS_REGION}
+      AWS_S3_BUCKET: ${AWS_S3_BUCKET}
+      AWS_CDN_URL: ${AWS_CDN_URL}
+      STREAMING_PUBLIC_URL: ${STREAMING_PUBLIC_URL}
+    ports:
+      - "3004:3004"
 
   frontend:
     build:
@@ -68,10 +72,11 @@ services:
         REACT_APP_ADMIN_URL: http://localhost:3002
         REACT_APP_CHAT_URL: http://localhost:3003
         REACT_APP_STREAMING_URL: http://localhost:3004
+    image: hv-frontend:latest
     depends_on:
-      - auth
-      - streaming
-      - admin
-      - chat
+      - authservice
+      - adminservice
+      - chatservice
+      - streamingservice
     ports:
       - "3000:80"
