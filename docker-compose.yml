@@ -75,17 +75,17 @@ services:
     build:
       context: ./frontend
       args:
-      REACT_APP_AUTH_API_URL: /api/auth
-
-      REACT_APP_STREAMING_API_URL: /api/stream
-
-      REACT_APP_STREAMING_PUBLIC_URL: /api/stream
-
-      REACT_APP_ADMIN_API_URL: /api/admin
-
-      REACT_APP_CHAT_API_URL: /api/chat
-
-      REACT_APP_CHAT_SOCKET_URL: /api/chat
+        REACT_APP_AUTH_API_URL: /api/auth
+  
+        REACT_APP_STREAMING_API_URL: /api/stream
+  
+        REACT_APP_STREAMING_PUBLIC_URL: /api/stream
+  
+        REACT_APP_ADMIN_API_URL: /api/admin
+  
+        REACT_APP_CHAT_API_URL: /api/chat
+  
+        REACT_APP_CHAT_SOCKET_URL: /api/chat
     image: hv-frontend:latest
     depends_on:
       - authservice
