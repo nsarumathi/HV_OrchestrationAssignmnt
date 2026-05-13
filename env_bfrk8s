@@ -1,0 +1,14 @@
+MONGO_URI=mongodb+srv://admin:YOUR_PASSWORD@cluster0.iz9ritv.mongodb.net/streamingapp?retryWrites=true&w=majority&appName=Cluster0
+
+JWT_SECRET=changeme
+
+CLIENT_URLS=http://localhost:3000
+
+AWS_ACCESS_KEY_ID=NEW_ACCESS_KEY
+AWS_SECRET_ACCESS_KEY=NEW_SECRET_KEY
+AWS_REGION=ap-south-2
+AWS_S3_BUCKET=streaming-app-bucket1
+
+AWS_CDN_URL=
+
+STREAMING_PUBLIC_URL=http://localhost:3002
