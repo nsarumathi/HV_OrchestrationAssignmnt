@@ -24,27 +24,28 @@ pipeline {
             }
         }
 
-        stage('Inject Env for Build') {
-            steps {
-                sh '''
-                export MONGO_URI=$MONGO_URI
-                export JWT_SECRET=$JWT_SECRET
-                export CLIENT_URLS=$CLIENT_URLS
-                export AWS_ACCESS_KEY_ID=$AWS_ACCESS_KEY_ID
-                export AWS_SECRET_ACCESS_KEY=$AWS_SECRET_ACCESS_KEY
-                export AWS_REGION=$AWS_REGION
-                export AWS_S3_BUCKET=$AWS_S3_BUCKET
-                export AWS_CDN_URL=$AWS_CDN_URL
-                export STREAMING_PUBLIC_URL=$STREAMING_PUBLIC_URL
-                '''
-            }
-        }
-
         stage('Docker Build') {
             steps {
-                sh '''
-                docker compose build
-                '''
+
+                // 🔐 Inject secrets properly here
+                withCredentials([
+
+                    string(credentialsId: 'mongodbpassword', variable: 'MONGO_PASSWORD'),
+                    string(credentialsId: 'AWS Access key', variable: 'AWS_ACCESS_KEY_ID'),
+                    string(credentialsId: 'AWS secret access key', variable: 'AWS_SECRET_ACCESS_KEY')
+
+                ]) {
+
+                    sh '''
+                    export MONGO_URI="mongodb+srv://admin:${MONGO_PASSWORD}@cluster0.iz9ritv.mongodb.net/streamingapp?retryWrites=true&w=majority&appName=Cluster0"
+
+                    export AWS_ACCESS_KEY_ID=$AWS_ACCESS_KEY_ID
+                    export AWS_SECRET_ACCESS_KEY=$AWS_SECRET_ACCESS_KEY
+                    export AWS_REGION=$AWS_REGION
+
+                    docker compose build
+                    '''
+                }
             }
         }
 
