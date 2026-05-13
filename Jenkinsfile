@@ -12,7 +12,7 @@ pipeline {
         CHAT_REPO = "${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_REGION}.amazonaws.com/hv-chatservice"
         STREAM_REPO = "${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_REGION}.amazonaws.com/hv-streamingservice"
 
-        IMAGE_TAG = "${BUILD_NUMBER}"
+        IMAGE_TAG = 'latest'
     }
 
     stages {
