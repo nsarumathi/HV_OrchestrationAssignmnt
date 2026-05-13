@@ -20,7 +20,8 @@ services:
 
   adminservice:
     build:
-      context: ./backend/adminService
+      context: ./backend
+      dockerfile: adminService/Dockerfile
     image: hv-adminservice:latest
     environment:
       PORT: 3002
@@ -36,7 +37,8 @@ services:
 
   chatservice:
     build:
-      context: ./backend/chatService
+       context: ./backend
+       dockerfile: chatService/Dockerfile
     image: hv-chatservice:latest
     environment:
       PORT: 3003
@@ -48,7 +50,8 @@ services:
 
   streamingservice:
     build:
-      context: ./backend/streamingService
+      context: ./backend
+      dockerfile: streamingService/Dockerfile
     image: hv-streamingservice:latest
     environment:
       PORT: 3004
