@@ -1,0 +1,89 @@
+version: "3.9"
+
+services:
+
+  authservice:
+    build:
+      context: ./backend/authService
+    image: hv-authservice:latest
+    environment:
+      PORT: 3001
+      MONGO_URI: ${MONGO_URI}
+      JWT_SECRET: ${JWT_SECRET}
+      CLIENT_URLS: ${CLIENT_URLS}
+      AWS_ACCESS_KEY_ID: ${AWS_ACCESS_KEY_ID}
+      AWS_SECRET_ACCESS_KEY: ${AWS_SECRET_ACCESS_KEY}
+      AWS_REGION: ${AWS_REGION}
+      AWS_S3_BUCKET: ${AWS_S3_BUCKET}
+    ports:
+      - "3001:3001"
+
+  adminservice:
+    build:
+      context: ./backend
+      dockerfile: adminService/Dockerfile
+    image: hv-adminservice:latest
+    environment:
+      PORT: 3003
+      MONGO_URI: ${MONGO_URI}
+      JWT_SECRET: ${JWT_SECRET}
+      CLIENT_URLS: ${CLIENT_URLS}
+      AWS_ACCESS_KEY_ID: ${AWS_ACCESS_KEY_ID}
+      AWS_SECRET_ACCESS_KEY: ${AWS_SECRET_ACCESS_KEY}
+      AWS_REGION: ${AWS_REGION}
+      AWS_S3_BUCKET: ${AWS_S3_BUCKET}
+    ports:
+      - "3003:3003"
+
+  chatservice:
+    build:
+       context: ./backend
+       dockerfile: chatService/Dockerfile
+    image: hv-chatservice:latest
+    environment:
+      PORT: 3004
+      MONGO_URI: ${MONGO_URI}
+      JWT_SECRET: ${JWT_SECRET}
+      CLIENT_URLS: ${CLIENT_URLS}
+      AWS_ACCESS_KEY_ID: ${AWS_ACCESS_KEY_ID}
+      AWS_SECRET_ACCESS_KEY: ${AWS_SECRET_ACCESS_KEY}
+      AWS_REGION: ${AWS_REGION}
+      AWS_S3_BUCKET: ${AWS_S3_BUCKET}
+    ports:
+      - "3004:3004"
+
+  streamingservice:
+    build:
+      context: ./backend
+      dockerfile: streamingService/Dockerfile
+    image: hv-streamingservice:latest
+    environment:
+      PORT: 3002
+      MONGO_URI: ${MONGO_URI}
+      JWT_SECRET: ${JWT_SECRET}
+      CLIENT_URLS: ${CLIENT_URLS}
+      AWS_ACCESS_KEY_ID: ${AWS_ACCESS_KEY_ID}
+      AWS_SECRET_ACCESS_KEY: ${AWS_SECRET_ACCESS_KEY}
+      AWS_REGION: ${AWS_REGION}
+      AWS_S3_BUCKET: ${AWS_S3_BUCKET}
+      AWS_CDN_URL: ${AWS_CDN_URL}
+      STREAMING_PUBLIC_URL: ${STREAMING_PUBLIC_URL}
+    ports:
+      - "3002:3002"
+
+  frontend:
+    build:
+      context: ./frontend
+      args:
+        REACT_APP_AUTH_URL: http://localhost:3001
+        REACT_APP_ADMIN_URL: http://localhost:3003
+        REACT_APP_CHAT_URL: http://localhost:3004
+        REACT_APP_STREAMING_URL: http://localhost:3002
+    image: hv-frontend:latest
+    depends_on:
+      - authservice
+      - adminservice
+      - chatservice
+      - streamingservice
+    ports:
+      - "3000:80"
