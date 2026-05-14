@@ -80,7 +80,7 @@ services:
         REACT_APP_CHAT_API_URL: /api/chat
         REACT_APP_STREAMING_API_URL: /api
         REACT_APP_STREAMING_PUBLIC_URL: /
-        REACT_APP_CHAT_SOCKET_URL: 
+        REACT_APP_CHAT_SOCKET_URL: /
     image: hv-frontend:latest
     depends_on:
       - authservice
