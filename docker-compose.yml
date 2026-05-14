@@ -75,12 +75,12 @@ services:
     build:
       context: ./frontend
       args:
-        REACT_APP_AUTH_API_URL: http://k8s-kubesyst-traefik-e4748bf5e6-015f3121baf54bf1.elb.ap-south-2.amazonaws.com/api
-        REACT_APP_STREAMING_API_URL: http://k8s-kubesyst-traefik-e4748bf5e6-015f3121baf54bf1.elb.ap-south-2.amazonaws.com/api
-        REACT_APP_STREAMING_PUBLIC_URL: http://k8s-kubesyst-traefik-e4748bf5e6-015f3121baf54bf1.elb.ap-south-2.amazonaws.com
-        REACT_APP_ADMIN_API_URL: http://k8s-kubesyst-traefik-e4748bf5e6-015f3121baf54bf1.elb.ap-south-2.amazonaws.com/api/admin
-        REACT_APP_CHAT_API_URL: http://k8s-kubesyst-traefik-e4748bf5e6-015f3121baf54bf1.elb.ap-south-2.amazonaws.com/api/chat
-        REACT_APP_CHAT_SOCKET_URL: http://k8s-kubesyst-traefik-e4748bf5e6-015f3121baf54bf1.elb.ap-south-2.amazonaws.com
+        REACT_APP_AUTH_API_URL: http://k8s-kubesyst-traefik-8d400d2f45-ae5f6e5de6ed5072.elb.ap-south-2.amazonaws.com/api
+        REACT_APP_STREAMING_API_URL: http://k8s-kubesyst-traefik-8d400d2f45-ae5f6e5de6ed5072.elb.ap-south-2.amazonaws.com/api
+        REACT_APP_STREAMING_PUBLIC_URL: http://k8s-kubesyst-traefik-8d400d2f45-ae5f6e5de6ed5072.elb.ap-south-2.amazonaws.com
+        REACT_APP_ADMIN_API_URL: http://k8s-kubesyst-traefik-8d400d2f45-ae5f6e5de6ed5072.elb.ap-south-2.amazonaws.com/api/admin
+        REACT_APP_CHAT_API_URL: http://k8s-kubesyst-traefik-8d400d2f45-ae5f6e5de6ed5072.elb.ap-south-2.amazonaws.com/api/chat
+        REACT_APP_CHAT_SOCKET_URL: http://k8s-kubesyst-traefik-8d400d2f45-ae5f6e5de6ed5072.elb.ap-south-2.amazonaws.com
     image: hv-frontend:latest
     depends_on:
       - authservice
