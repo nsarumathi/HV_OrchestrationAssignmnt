@@ -470,22 +470,6 @@ Alarm → SNS → Lambda → Slack
 
 ---
 
-# 📁 Project Structure
-
-```text
-helm_deployment/
-│
-├── mern-app-chart/
-│   ├── templates/
-│   ├── values.yaml
-│   ├── Chart.yaml
-│
-├── Jenkinsfile
-├── docker-compose.yml
-```
-
----
-
 # 🚀 DevOps Features Implemented
 
 - ✅ CI/CD with Jenkins
@@ -543,6 +527,3 @@ helm_deployment/
 # 👨‍💻 Author
 
 **Sharu**
-
-Cloud & DevOps Engineer  
-MERN Stack | Kubernetes | AWS | CI/CD | DevOps Automation
