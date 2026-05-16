@@ -1,0 +1,49 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: authservice
+  namespace: mern-app
+
+spec:
+  replicas: 2
+
+  selector:
+    matchLabels:
+      app: authservice
+
+  template:
+    metadata:
+      labels:
+        app: authservice
+
+    spec:
+      containers:
+        - name: authservice
+          image: 944765969321.dkr.ecr.ap-south-2.amazonaws.com/hv-authservice:latest
+
+          ports:
+            - containerPort: 3001
+
+          envFrom:
+            - configMapRef:
+                name: mern-config
+
+            - secretRef:
+                name: mern-secrets
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: authservice
+  namespace: mern-app
+
+spec:
+  type: ClusterIP
+
+  selector:
+    app: authservice
+
+  ports:
+    - port: 80
+      targetPort: 3001

@@ -1,0 +1,39 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: chatservice
+  namespace: mern-app
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: chatservice
+  template:
+    metadata:
+      labels:
+        app: chatservice
+    spec:
+      containers:
+        - name: chatservice
+          image: 944765969321.dkr.ecr.ap-south-2.amazonaws.com/hv-chatservice:latest
+          ports:
+            - containerPort: 3004
+          envFrom:
+            - configMapRef:
+                name: mern-config
+
+            - secretRef:
+                name: mern-secrets
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: chatservice
+  namespace: mern-app
+spec:
+  type: ClusterIP
+  selector:
+    app: chatservice
+  ports:
+    - port: 80
+      targetPort: 3004

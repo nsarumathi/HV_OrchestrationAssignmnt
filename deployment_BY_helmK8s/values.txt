@@ -1,0 +1,65 @@
+# Global Replica Count
+replicaCount: 1
+
+# Frontend
+frontend:
+  image: 944765969321.dkr.ecr.ap-south-2.amazonaws.com/hv-frontend
+  tag: latest
+  containerPort: 80
+  servicePort: 3000
+
+# Auth Service
+authService:
+  image: 944765969321.dkr.ecr.ap-south-2.amazonaws.com/hv-authservice
+  tag: latest
+  port: 3001
+
+# Admin Service
+adminService:
+  image: 944765969321.dkr.ecr.ap-south-2.amazonaws.com/hv-adminservice
+  tag: latest
+  port: 3003
+
+# Chat Service
+chatService:
+  image: 944765969321.dkr.ecr.ap-south-2.amazonaws.com/hv-chatservice
+  tag: latest
+  port: 3004
+
+# Streaming Service
+streamingService:
+  image: 944765969321.dkr.ecr.ap-south-2.amazonaws.com/hv-streamingservice
+  tag: latest
+  port: 3002
+
+# Ingress
+ingress:
+  enabled: true
+  className: traefik
+  host: k8s-kubesyst-traefik-b5c2ce740a-f19e8a5a0cdd20e2.elb.ap-south-2.amazonaws.com
+
+# ConfigMap Values
+config:
+  configMapName: mern-config
+
+  CLIENT_URLS: "k8s-kubesyst-traefik-b5c2ce740a-f19e8a5a0cdd20e2.elb.ap-south-2.amazonaws.com"
+
+  AWS_REGION: "ap-south-2"
+
+  AWS_S3_BUCKET: "streaming-app-bucket1"
+
+# Secret Values
+secrets:
+  secretName: mern-secrets
+
+  MONGO_URI: "mongodb+srv://admin:<Password>@cluster0.iz9ritv.mongodb.net/streamingapp?retryWrites=true&w=majority&appName=Cluster0"
+
+  JWT_SECRET: "changeme"
+
+  AWS_ACCESS_KEY_ID: ""
+
+  AWS_SECRET_ACCESS_KEY: ""
+
+  AWS_REGION: "ap-south-2"
+
+  AWS_S3_BUCKET: "streaming-app-bucket1"

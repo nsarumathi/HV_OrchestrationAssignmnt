@@ -1,0 +1,48 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: chatservice
+
+spec:
+  replicas: {{ .Values.replicaCount }}
+
+  selector:
+    matchLabels:
+      app: chatservice
+
+  template:
+    metadata:
+      labels:
+        app: chatservice
+
+    spec:
+      containers:
+        - name: chatservice
+          image: "{{ .Values.chatService.image }}:{{ .Values.chatService.tag }}"
+
+          ports:
+            - containerPort: {{ .Values.chatService.port }}
+
+          envFrom:
+            - configMapRef:
+                name: {{ .Values.config.configMapName }}
+
+            - secretRef:
+                name: {{ .Values.secrets.secretName }}
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: chatservice
+
+spec:
+  type: ClusterIP
+
+  selector:
+    app: chatservice
+
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: {{ .Values.chatService.port }}

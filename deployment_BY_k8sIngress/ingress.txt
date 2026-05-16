@@ -1,0 +1,67 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: mern-ingress
+  namespace: mern-app
+  annotations:
+    kubernetes.io/ingress.class: traefik
+    traefik.ingress.kubernetes.io/router.entrypoints: web
+spec:
+  rules:
+    - http:
+        paths:
+
+          # AUTH SERVICE
+          - path: /api
+            pathType: Prefix
+            backend:
+              service:
+                name: authservice
+                port:
+                  number: 80
+
+          # ADMIN SERVICE
+          - path: /api/admin
+            pathType: Prefix
+            backend:
+              service:
+                name: adminservice
+                port:
+                  number: 80
+
+          #chat socket
+          - path: /socket.io
+            pathType: Prefix
+            backend:
+              service:
+                name: chatservice
+                port:
+                  number: 80
+
+          # CHAT SERVICE
+          - path: /api/chat
+            pathType: Prefix
+            backend:
+              service:
+                name: chatservice
+                port:
+                  number: 80
+            
+
+          # STREAMING SERVICE
+          - path: /api/streaming
+            pathType: Prefix
+            backend:
+              service:
+                name: streamingservice
+                port:
+                  number: 80
+
+          # FRONTEND (React SPA)
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: frontend
+                port:
+                  number: 80

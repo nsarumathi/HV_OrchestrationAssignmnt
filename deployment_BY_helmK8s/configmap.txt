@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: ConfigMap
+
+metadata:
+  name: {{ .Values.config.configMapName }}
+
+data:
+  CLIENT_URLS: {{ .Values.config.CLIENT_URLS | quote }}
+
+  AWS_REGION: {{ .Values.config.AWS_REGION | quote }}
+
+  AWS_S3_BUCKET: {{ .Values.config.AWS_S3_BUCKET | quote }}

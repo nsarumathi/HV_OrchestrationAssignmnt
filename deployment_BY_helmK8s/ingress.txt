@@ -1,0 +1,67 @@
+{{- if .Values.ingress.enabled }}
+
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+
+metadata:
+  name: mern-ingress
+
+  annotations:
+    kubernetes.io/ingress.class: {{ .Values.ingress.className }}
+    traefik.ingress.kubernetes.io/router.entrypoints: web
+
+spec:
+  rules:
+    - host: {{ .Values.ingress.host }}
+
+      http:
+        paths:
+          - path: /api
+            pathType: Prefix
+            backend:
+              service:
+                name: authservice
+                port:
+                  number: 80
+
+          - path: /api/admin
+            pathType: Prefix
+            backend:
+              service:
+                name: adminservice
+                port:
+                  number: 80
+
+          - path: /socket.io
+            pathType: Prefix
+            backend:
+              service:
+                name: chatservice
+                port:
+                  number: 80
+
+          - path: /api/chat
+            pathType: Prefix
+            backend:
+              service:
+                name: chatservice
+                port:
+                  number: 80
+
+          - path: /api/streaming
+            pathType: Prefix
+            backend:
+              service:
+                name: streamingservice
+                port:
+                  number: 80
+
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: frontend
+                port:
+                  number: 80
+
+{{- end }}

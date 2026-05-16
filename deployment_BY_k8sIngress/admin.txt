@@ -1,0 +1,39 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: adminservice
+  namespace: mern-app
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: adminservice
+  template:
+    metadata:
+      labels:
+        app: adminservice
+    spec:
+      containers:
+        - name: adminservice
+          image: 944765969321.dkr.ecr.ap-south-2.amazonaws.com/hv-adminservice:latest
+          ports:
+            - containerPort: 3003
+          envFrom:
+            - configMapRef:
+                name: mern-config
+
+            - secretRef:
+                name: mern-secrets
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: adminservice
+  namespace: mern-app
+spec:
+  type: ClusterIP
+  selector:
+    app: adminservice
+  ports:
+    - port: 80
+      targetPort: 3003

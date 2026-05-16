@@ -1,0 +1,43 @@
+import json
+import urllib3
+
+http = urllib3.PoolManager()
+
+WEBHOOK_URL = "Your WEBHOOK_URL"
+
+def lambda_handler(event, context):
+    try:
+        # Get SNS message
+        message = event['Records'][0]['Sns']['Message']
+
+        # Slack payload
+        slack_message = {
+            "text": f"🚨 AWS Alert:\n{message}"
+        }
+
+        # Convert to JSON
+        encoded_msg = json.dumps(slack_message).encode('utf-8')
+
+        # Send request to Slack
+        response = http.request(
+            "POST",
+            WEBHOOK_URL,
+            body=encoded_msg,
+            headers={"Content-Type": "application/json"}
+        )
+
+        print(f"Slack response status: {response.status}")
+        print(f"Slack response body: {response.data.decode('utf-8')}")
+
+        return {
+            "statusCode": 200,
+            "body": "Message sent to Slack successfully"
+        }
+
+    except Exception as e:
+        print(f"Error sending message to Slack: {str(e)}")
+
+        return {
+            "statusCode": 500,
+            "body": str(e)
+        }

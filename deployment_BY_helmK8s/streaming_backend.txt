@@ -1,0 +1,48 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: streamingservice
+
+spec:
+  replicas: {{ .Values.replicaCount }}
+
+  selector:
+    matchLabels:
+      app: streamingservice
+
+  template:
+    metadata:
+      labels:
+        app: streamingservice
+
+    spec:
+      containers:
+        - name: streamingservice
+          image: "{{ .Values.streamingService.image }}:{{ .Values.streamingService.tag }}"
+
+          ports:
+            - containerPort: {{ .Values.streamingService.port }}
+
+          envFrom:
+            - configMapRef:
+                name: {{ .Values.config.configMapName }}
+
+            - secretRef:
+                name: {{ .Values.secrets.secretName }}
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: streamingservice
+
+spec:
+  type: ClusterIP
+
+  selector:
+    app: streamingservice
+
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: {{ .Values.streamingService.port }}

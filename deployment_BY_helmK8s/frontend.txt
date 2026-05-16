@@ -1,0 +1,45 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: frontend
+
+spec:
+  replicas: {{ .Values.replicaCount }}
+
+  selector:
+    matchLabels:
+      app: frontend
+
+  template:
+    metadata:
+      labels:
+        app: frontend
+
+    spec:
+      containers:
+        - name: frontend
+          image: "{{ .Values.frontend.image }}:{{ .Values.frontend.tag }}"
+
+          ports:
+            - containerPort: {{ .Values.frontend.containerPort }}
+
+          envFrom:
+            - configMapRef:
+                name: {{ .Values.config.configMapName }}
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: frontend
+
+spec:
+  type: ClusterIP
+
+  selector:
+    app: frontend
+
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: {{ .Values.frontend.containerPort }}

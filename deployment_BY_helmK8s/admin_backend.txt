@@ -1,0 +1,48 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: adminservice
+
+spec:
+  replicas: {{ .Values.replicaCount }}
+
+  selector:
+    matchLabels:
+      app: adminservice
+
+  template:
+    metadata:
+      labels:
+        app: adminservice
+
+    spec:
+      containers:
+        - name: adminservice
+          image: "{{ .Values.adminService.image }}:{{ .Values.adminService.tag }}"
+
+          ports:
+            - containerPort: {{ .Values.adminService.port }}
+
+          envFrom:
+            - configMapRef:
+                name: {{ .Values.config.configMapName }}
+
+            - secretRef:
+                name: {{ .Values.secrets.secretName }}
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: adminservice
+
+spec:
+  type: ClusterIP
+
+  selector:
+    app: adminservice
+
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: {{ .Values.adminService.port }}
